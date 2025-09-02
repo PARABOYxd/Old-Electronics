@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("USER")
+  bookings      Booking[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  icon        String?
+  isActive    Boolean  @default(true)
+  devices     Device[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Device {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  brands      Brand[]
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  deviceId  String
+  device    Device    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  models    Model[]
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Model {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  brandId   String
+  brand     Brand     @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  variants  Variant[]
+  bookings  Booking[]
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Variant {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  modelId     String
+  model       Model     @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  bookings    Booking[]
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Condition {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  multiplier  Float     @default(1.0)
+  bookings    Booking[]
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model PricingRule {
+  id         String   @id @default(cuid())
+  categoryId String?
+  deviceId   String?
+  brandId    String?
+  modelId    String?
+  basePrice  Float
+  minPrice   Float?
+  maxPrice   Float?
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model City {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  state     String
+  isActive  Boolean   @default(true)
+  isComingSoon Boolean @default(false)
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Booking {
+  id              String    @id @default(cuid())
+  referenceCode   String    @unique
+  customerName    String
+  contactNumber   String
+  email           String?
+  address         String
+  cityId          String
+  city            City      @relation(fields: [cityId], references: [id])
+  pincode         String
+  modelId         String
+  model           Model     @relation(fields: [modelId], references: [id])
+  variantId       String?
+  variant         Variant?  @relation(fields: [variantId], references: [id])
+  conditionId     String
+  condition       Condition @relation(fields: [conditionId], references: [id])
+  estimatedPrice  Float
+  finalPrice      Float?
+  pickupDate      DateTime
+  preferredTimeSlot String
+  status          BookingStatus @default(PENDING)
+  notes           String?
+  adminNotes      String?
+  userId          String?
+  user            User?     @relation(fields: [userId], references: [id])
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  PICKED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  content     String   @db.Text
+  image       String?
+  tags        String[]
+  isPublished Boolean  @default(false)
+  author      String?
+  readTime    Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Stats {
+  id              String   @id @default(cuid())
+  devicesCollected Int      @default(0)
+  energySavedKwh  Float    @default(0)
+  treesPreserved  Int      @default(0)
+  ewasteKg        Float    @default(0)
+  updatedAt       DateTime @updatedAt
+}
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  name       String
+  location   String?
+  rating     Int      @default(5)
+  content    String
+  image      String?
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
