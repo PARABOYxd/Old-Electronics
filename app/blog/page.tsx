@@ -43,7 +43,7 @@ export default async function BlogPage() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.map((post: typeof posts[number]) => (
             <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
               {post.image && (
                 <div className="relative h-48 overflow-hidden">
@@ -76,17 +76,17 @@ export default async function BlogPage() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
-                
+
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.slice(0, 3).map((tag) => (
+                    {post.tags.slice(0, 3).map((tag: string) => (
                       <Badge key={tag} variant="secondary" className="text-xs">
                         {tag}
                       </Badge>
                     ))}
                   </div>
                 )}
-                
+
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     By {post.author}
