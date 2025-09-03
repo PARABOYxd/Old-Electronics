@@ -10,7 +10,7 @@ export function HeroSection() {
   return (
     <div className="relative bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 py-12 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -20,7 +20,7 @@ export function HeroSection() {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <motion.h1 
+              <motion.h1
                 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -32,8 +32,8 @@ export function HeroSection() {
                 </span>{' '}
                 & pay you instantly.
               </motion.h1>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-xl text-gray-600 dark:text-gray-300 max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export function HeroSection() {
               </motion.p>
             </div>
 
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ export function HeroSection() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              
+
               <div className="flex gap-2">
                 <Button asChild variant="outline" size="lg">
                   <Link href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE}`}>
@@ -63,7 +63,7 @@ export function HeroSection() {
                     Call Now
                   </Link>
                 </Button>
-                
+
                 <Button asChild variant="outline" size="lg">
                   <Link href={`https://wa.me/${process.env.NEXT_PUBLIC_CONTACT_PHONE?.replace('+', '')}`}>
                     <MessageCircle className="h-4 w-4 mr-2" />
@@ -74,7 +74,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* Trust Elements */}
-            <motion.div 
+            <motion.div
               className="flex flex-wrap items-center gap-6 pt-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -82,16 +82,24 @@ export function HeroSection() {
             >
               <p className="text-sm text-gray-500 dark:text-gray-400">Trusted by 10,000+ customers</p>
               <div className="flex items-center gap-4 opacity-60">
-                <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                  <span className="text-xs font-semibold">Media 1</span>
+                {/* TOI – Bold red “TOI” */}
+                <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center overflow-hidden">
+                  <img src="https://brandeps.com/logo/t/Times-of-India-01.png" alt="Times of India" className="h-full w-full object-contain" />
                 </div>
-                <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                  <span className="text-xs font-semibold">Media 2</span>
+
+                {/* NDTV */}
+                <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center overflow-hidden">
+                  <img src="https://brandeps.com/logo/n/NDTV-01.png" alt="NDTV" className="h-full w-full object-contain" />
                 </div>
-                <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                  <span className="text-xs font-semibold">Media 3</span>
+
+                {/* TOI crest */}
+                <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center overflow-hidden">
+                  <img src="https://seeklogo.com/vector-logo/537021/the-times-of-india.png" alt="The Times of India Crest" className="h-full w-full object-contain" />
                 </div>
+
+
               </div>
+
             </motion.div>
           </motion.div>
 
@@ -103,7 +111,7 @@ export function HeroSection() {
           >
             <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="https://images.pexels.com/photos/163166/mobile-phone-android-apps-phone-163166.jpeg"
+                src="https://images.pexels.com/photos/22491720/pexels-photo-22491720.jpeg"
                 alt="Electronics pickup service"
                 fill
                 className="object-cover"
@@ -111,7 +119,7 @@ export function HeroSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
-            
+
             {/* Floating Cards */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
@@ -121,7 +129,7 @@ export function HeroSection() {
               <p className="text-sm font-semibold text-green-600">Free Pickup</p>
               <p className="text-xs text-gray-600 dark:text-gray-400">No charges</p>
             </motion.div>
-            
+
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 3, delay: 1.5 }}

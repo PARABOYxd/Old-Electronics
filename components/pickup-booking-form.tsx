@@ -27,13 +27,83 @@ const timeSlots = [
   '04:00 PM - 06:00 PM',
   '06:00 PM - 08:00 PM',
 ];
+// ✅ Dummy Data
+const dummyFormData: FormData = {
+  cities: [
+    { id: '1', name: 'Delhi', state: 'Delhi' },
+    { id: '2', name: 'Mumbai', state: 'Maharashtra' },
+    { id: '3', name: 'Bangalore', state: 'Karnataka' },
+  ],
+  categories: [
+    {
+      id: 'c1',
+      name: 'Smartphone',
+      devices: [
+        {
+          id: 'd1',
+          name: 'iPhone',
+          brands: [
+            {
+              id: 'b1',
+              name: 'Apple',
+              models: [
+                {
+                  id: 'm1',
+                  name: 'iPhone 13',
+                  variants: [
+                    { id: 'v1', name: '128GB' },
+                    { id: 'v2', name: '256GB' },
+                  ],
+                },
+                {
+                  id: 'm2',
+                  name: 'iPhone 12',
+                  variants: [{ id: 'v3', name: '64GB' }],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'c2',
+      name: 'Laptop',
+      devices: [
+        {
+          id: 'd2',
+          name: 'MacBook',
+          brands: [
+            {
+              id: 'b2',
+              name: 'Apple',
+              models: [
+                {
+                  id: 'm3',
+                  name: 'MacBook Pro M1',
+                  variants: [{ id: 'v4', name: '512GB SSD' }],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  conditions: [
+    { id: 'cond1', name: 'Like New', multiplier: 1 },
+    { id: 'cond2', name: 'Good', multiplier: 0.8 },
+    { id: 'cond3', name: 'Fair', multiplier: 0.6 },
+    { id: 'cond4', name: 'Broken', multiplier: 0.3 },
+  ],
+};
 
 export function PickupBookingForm() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData | null>(null);
   const [estimatedPrice, setEstimatedPrice] = useState<number>(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -50,8 +120,12 @@ export function PickupBookingForm() {
   const selectedModelId = watch('modelId');
   const selectedConditionId = watch('conditionId');
 
+  // useEffect(() => {
+  //   fetchFormData();
+  // }, []);
   useEffect(() => {
-    fetchFormData();
+    // ✅ Load dummy data instead of API
+    setFormData(dummyFormData);
   }, []);
 
   useEffect(() => {
@@ -95,7 +169,7 @@ export function PickupBookingForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, estimatedPrice }),
       });
-      
+
       if (response.ok) {
         const booking = await response.json();
         window.location.href = `/track/${booking.referenceCode}`;
@@ -128,9 +202,8 @@ export function PickupBookingForm() {
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className={`flex items-center justify-center w-10 h-10 rounded-full ${
-                step >= i ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-500'
-              }`}
+              className={`flex items-center justify-center w-10 h-10 rounded-full ${step >= i ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-500'
+                }`}
             >
               {i}
             </div>

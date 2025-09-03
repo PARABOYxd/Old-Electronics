@@ -62,7 +62,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <HeroSection />
-      
+
       {/* How It Works Section */}
       <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4">
@@ -85,7 +85,7 @@ export default function HomePage() {
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300">{step.description}</p>
                 </div>
-                
+
                 {index < steps.length - 1 && (
                   <ArrowRight className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 text-green-600 h-8 w-8" />
                 )}
@@ -154,7 +154,7 @@ export default function HomePage() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-green-600">
+            <Button asChild size="lg" variant="outline" className="text-black border-white hover:bg-white hover:text-green-600">
               <Link href="/track">
                 Track Your Pickup
               </Link>

@@ -88,7 +88,7 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+              className="fixed inset-y-0 h-screen right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
             >
               <div className="flex items-center justify-between">
                 <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
@@ -104,7 +104,7 @@ export function Header() {
                   <X className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
-              
+
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
@@ -119,7 +119,7 @@ export function Header() {
                       </Link>
                     ))}
                   </div>
-                  
+
                   <div className="py-6 space-y-3">
                     <Button asChild variant="outline" size="sm" className="w-full">
                       <Link href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE}`}>
