@@ -70,6 +70,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
   });
 
+  // infer type from query
+  type RelatedPost = typeof relatedPosts[number];
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="max-w-4xl mx-auto px-4">
@@ -146,7 +149,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 Related Articles
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
-                {relatedPosts.map((relatedPost) => (
+                {relatedPosts.map((relatedPost: RelatedPost) => (
                   <Card key={relatedPost.slug} className="hover:shadow-md transition-shadow">
                     {relatedPost.image && (
                       <div className="relative h-32 overflow-hidden">
